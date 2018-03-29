@@ -48,6 +48,15 @@ public class LexicalAnalyzer {
         }
     }
 
+    public ArrayList<Token> returnTokens(){
+        return (ArrayList<Token>) tokens;
+    }
+
+    public Token getToken(int index){
+        return tokens.get(index);
+
+    }
+
 
     /**
      * This goes through a line and finds a lexeme using the whitespace that surrounds it.
@@ -108,6 +117,10 @@ public class LexicalAnalyzer {
                 return TokenType.MULT_TOK;
             case "/":
                 return TokenType.DIV_TOK;
+            case "(":
+                return TokenType.PARENL_TOK;
+            case ")":
+                return TokenType.PARENR_Tok;
             default:
 
                 /**
