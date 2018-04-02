@@ -30,69 +30,70 @@ public class Main {
         }
 
 
+        parser(lexicalAnalyzer, count);
 
+
+    }
+
+    private static void parser(LexicalAnalyzer lexicalAnalyzer, int count) {
+        int tempCount;
         while(lexicalAnalyzer.getToken(count).getTokenType() != TokenType.EOS_TOK){
             switch(lexicalAnalyzer.getToken(count).getTokenType()){
+
                 case ID_TOK:
-                    System.out.println("Assignment Statement Lexemes: " );
                     tempCount = count;
                     while(lexicalAnalyzer.getToken(tempCount).getRowNumber() == lexicalAnalyzer.getToken(count).getRowNumber()){
 
-                        System.out.print(lexicalAnalyzer.getToken(tempCount).getLexeme() + " ");
+                        System.out.print(lexicalAnalyzer.getToken(tempCount).getTokenType() +"(" + lexicalAnalyzer.getToken(tempCount).getLexeme() + ")" + " ");
                         tempCount++;
                     }
-                    System.out.print("\n");
-                    System.out.println("Assignment Statement Tokens: " );
-                    tempCount = count;
-                    while(lexicalAnalyzer.getToken(tempCount).getRowNumber() == lexicalAnalyzer.getToken(count).getRowNumber()){
-
-                        System.out.print(lexicalAnalyzer.getToken(tempCount).getTokenType() + " ");
-                        tempCount++;
-                    }
+                    System.out.print("is an assignment statement");
                     spaceText();
 
                     count = tempCount;
                     break;
+
                 case WHILE_TOK:
                     do{
-                        System.out.print(lexicalAnalyzer.getToken(count).getTokenType() + " ");
+                        System.out.print(lexicalAnalyzer.getToken(count).getTokenType() +"(" + lexicalAnalyzer.getToken(count).getLexeme() + ")" + " ");
                         count++;
-                    }while(lexicalAnalyzer.getToken(count).getTokenType() != TokenType.END_TOK);
+                    }while(lexicalAnalyzer.getToken(count - 1).getTokenType() != TokenType.END_TOK);
                     System.out.print("is a while statement");
                     spaceText();
                     break;
+
                 case IF_TOK:
                     do{
-                        System.out.print(lexicalAnalyzer.getToken(count).getTokenType() + " ");
+                        System.out.print(lexicalAnalyzer.getToken(count).getTokenType() +"(" + lexicalAnalyzer.getToken(count).getLexeme() + ")" + " ");
                         count++;
-                    }while(lexicalAnalyzer.getToken(count).getTokenType() != TokenType.END_TOK);
+                    }while(lexicalAnalyzer.getToken(count -1).getTokenType() != TokenType.END_TOK);
                     System.out.print("is an if statement");
                     spaceText();
                     break;
+
                 case REPEAT_TOK:
                     do{
-                        System.out.print(lexicalAnalyzer.getToken(count).getTokenType() + " ");
+                        System.out.print(lexicalAnalyzer.getToken(count).getTokenType() +"(" + lexicalAnalyzer.getToken(count).getLexeme() + ")" + " ");
                         count++;
-                    }while(lexicalAnalyzer.getToken(count).getTokenType() != TokenType.EQ_TOK);
+                    }while(lexicalAnalyzer.getToken(count - 1).getTokenType() != TokenType.EQ_TOK);
                     System.out.print(lexicalAnalyzer.getToken(count).getTokenType() + " ");
                     System.out.print("is a repeat statement");
                     count++;
                     spaceText();
                     break;
+
                 case PRINT_TOK:
-                    do{
+                    /*do{
                         System.out.print(lexicalAnalyzer.getToken(count).getTokenType() + " ");
                         count++;
-                    }while(lexicalAnalyzer.getToken(count).getTokenType() != TokenType.PARENR_Tok);
+                    }while(lexicalAnalyzer.getToken(count - 1).getTokenType() != TokenType.PARENR_Tok);*/
+                    System.out.print(lexicalAnalyzer.getToken(count).getTokenType() +"(" + lexicalAnalyzer.getToken(count).getLexeme() + ")" + " ");
                     System.out.print("is a print statement");
                     count++;
                     spaceText();
                     break;
             }
         }
-
-
-
     }
 
     private static void spaceText() {
