@@ -1,4 +1,6 @@
-package com.Potchen;
+package com.Potchen.Parse;
+
+import com.Potchen.Interpreter.Memory;
 
 /**
  * Contains all expressions Id, Binary, Boolean
@@ -10,8 +12,10 @@ public interface ArithmeticExpression {
     LiteralInteger value(Memory memory);
 
 
-
-    public static class Id implements ArithmeticExpression{
+    /**
+     * Contains a char
+     */
+    class Id implements ArithmeticExpression{
 
         private char iDChar;
 
@@ -24,13 +28,21 @@ public interface ArithmeticExpression {
             return iDChar;
         }
 
+        /**
+         *
+         * @param memory
+         * @return The value of the Id from memory
+         */
         @Override
         public LiteralInteger value(Memory memory) {
             return memory.varEquals(key());
         }
     }
 
-    public static class BinaryExpression implements ArithmeticExpression{
+    /**
+     * Contains an ArithmeticOperator as well as 2 ArithmeticExpressions
+     */
+    class BinaryExpression implements ArithmeticExpression{
 
 
         ArithmeticOperator op;
@@ -47,7 +59,7 @@ public interface ArithmeticExpression {
          * This is a recursive method, it checks each expression,
          * If it is an ID it calls the ID from memory and assigns it,
          * If it is a number it assigns it,
-         * If it is an expression it calls itself again
+         * If it is an expression it calls itself again in getNum
          * @param memory
          * @return
          */
@@ -56,21 +68,9 @@ public interface ArithmeticExpression {
             int num1;
             int num2;
 
-            if(expr1 instanceof Id){
-                num1 = memory.varEquals(((Id) expr1).key()).getNum();
-            }if(expr1 instanceof LiteralInteger){
-                num1 = ((LiteralInteger)expr1).getNum();
-            }else{
-                num1 = value(memory).getNum();
-            }
+            num1 = getNum(memory, expr1);
 
-            if(expr2 instanceof Id){
-                num2 = memory.varEquals(((Id) expr2).key()).getNum();
-            }if(expr2 instanceof LiteralInteger){
-                num2 = ((LiteralInteger)expr2).getNum();
-            }else{
-                num2 = value(memory).getNum();
-            }
+            num2 = getNum(memory, expr2);
 
             switch (op){
                 case ADD_OP:
@@ -86,17 +86,22 @@ public interface ArithmeticExpression {
             return null;
         }
 
-
-        public ArithmeticExpression getExpr1() {
-            return expr1;
-        }
-
-        public ArithmeticExpression getExpr2() {
-            return expr2;
-        }
-
-        public ArithmeticOperator getOp() {
-            return op;
+        /**
+         *
+         * @param memory
+         * @param expr
+         * @return An Integer based on the type of ArithmeticExpression
+         */
+        private int getNum(Memory memory, ArithmeticExpression expr) {
+            int num;
+            if(expr instanceof Id){
+                num = memory.varEquals(((Id) expr).key()).getNum();
+            }else if(expr instanceof LiteralInteger){
+                num = ((LiteralInteger) expr).getNum();
+            }else{
+                num = value(memory).getNum();
+            }
+            return num;
         }
 
         public enum ArithmeticOperator {
@@ -104,7 +109,10 @@ public interface ArithmeticExpression {
         }
     }
 
-    public static class LiteralInteger implements ArithmeticExpression{
+    /**
+     * Contains an integer
+     */
+    class LiteralInteger implements ArithmeticExpression{
 
         private int num;
 
@@ -116,6 +124,11 @@ public interface ArithmeticExpression {
             return num;
         }
 
+        /**
+         * Doesn't use memory since the LiteralInteger is known
+         * @param memory
+         * @return
+         */
         @Override
         public LiteralInteger value(Memory memory) {
             return new LiteralInteger(num);

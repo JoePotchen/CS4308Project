@@ -1,11 +1,15 @@
-package com.Potchen;
+package com.Potchen.Parse;
 
+import com.Potchen.Interpreter.Memory;
+
+/**
+ * Contains a RelationshipOperator and 2 ArithmeticExpressions
+ */
 public class BooleanExpression{
 
     RelationshipOperator op;
     ArithmeticExpression expr1;
     ArithmeticExpression expr2;
-    Boolean returnBool;
 
     BooleanExpression(RelationshipOperator op, ArithmeticExpression expr1, ArithmeticExpression expr2){
         this.op = op;
@@ -13,6 +17,11 @@ public class BooleanExpression{
         this.expr2 = expr2;
     }
 
+    /**
+     * Looks at the operator and then checks to see if the BooleanExpression is true or false
+     * @param memory
+     * @return
+     */
     public boolean value(Memory memory){
         switch (op){
             case EQ_OP:

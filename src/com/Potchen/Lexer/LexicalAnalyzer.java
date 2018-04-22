@@ -1,12 +1,10 @@
-package com.Potchen;
+package com.Potchen.Lexer;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
-import java.util.regex.Pattern;
 
 /*
 
@@ -233,6 +231,11 @@ public class LexicalAnalyzer {
         return index;
     }
 
+    /**
+     *
+     * @return Returns the current token without deleting it from the Array
+     * @throws LexicalException
+     */
     public Token getLookaheadToken() throws LexicalException{
         if(tokens.isEmpty()){
             throw new LexicalException("no more tokens");
@@ -240,6 +243,11 @@ public class LexicalAnalyzer {
         return tokens.get(0);
     }
 
+    /**
+     *
+     * @return Returns the current token and deletes it from the Array
+     * @throws LexicalException
+     */
     public Token getNextToken() throws LexicalException{
         if(tokens.isEmpty())
             throw new LexicalException("No more tokens");

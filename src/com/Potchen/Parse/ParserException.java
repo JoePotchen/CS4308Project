@@ -1,4 +1,4 @@
-package com.Potchen;
+package com.Potchen.Parse;
 
 public class ParserException extends Exception{
 

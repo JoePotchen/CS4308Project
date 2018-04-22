@@ -1,8 +1,8 @@
-package com.Potchen;
+package com.Potchen.Interpreter;
 
 public class InterpreterException extends Exception{
 
-    InterpreterException(String string){
+    public InterpreterException(String string){
         super();
     }
 

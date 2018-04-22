@@ -1,4 +1,4 @@
-package com.Potchen;
+package com.Potchen.Lexer;
 
 /**
  * Created by Joe on 2/22/2018.
