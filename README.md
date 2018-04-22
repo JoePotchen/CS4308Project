@@ -1,3 +1,3 @@
-# Final Project for CS5408 Concepts of Programming Languages
+# Final Project for CS4308 Concepts of Programming Languages
 
 This is a really simple LUA interpreter.
