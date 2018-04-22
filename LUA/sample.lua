@@ -1,10 +1,11 @@
-A = 0
-while A < 10 do
-    A = A + 1
+function A ( )
+    n = 1
+    print ( n )
+    if n == 1 then b = 10 else b = 5 end
+    print ( b )
+
+    while b ~= 0 do
+        b = - b 1
+        print ( b )
+    end
 end
-print (A)
-A = 100
-repeat
-    A = A - 1
-until A == 0
-if A >= 0 then A = 4 end

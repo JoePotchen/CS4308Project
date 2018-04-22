@@ -1,29 +1,34 @@
 package com.Potchen;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * Created by joepo on 3/29/2018.
  */
 public class Memory {
 
-    private ArrayList<Token> tokList;
-    private int count;
+    private HashMap<Character, ArithmeticExpression.LiteralInteger> varMap = new HashMap<>();
 
-    public Memory(ArrayList<Token> tokList, int count){
-        this.tokList = tokList;
-        this.count = count;
+    public Memory(){
+
     }
 
-    public Token getNextToken(int count){
-        Token returnTok = tokList.get(count);
-        this.count = this.count + count;
-        return returnTok;
+
+    public void addVar(ArithmeticExpression.Id id, ArithmeticExpression.LiteralInteger integer){
+        varMap.put(id.key(), integer);
     }
 
-    public void increaseCount(int increase){
-        count = count + increase;
+    public void removeVar(ArithmeticExpression.Id id){
+        varMap.remove(id);
     }
+
+
+    public ArithmeticExpression.LiteralInteger varEquals(Character character){
+        return varMap.get(character);
+    }
+
+
 
 
 }

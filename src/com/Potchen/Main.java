@@ -10,27 +10,31 @@ public class Main {
 
         String fname = "./LUA/sample.lua";
         LexicalAnalyzer lexicalAnalyzer = null;
-        int count = 0;
-        int tempCount = 0;
-        int tempLineNum = 0;
+
+
+
 
 
         try{
-            lexicalAnalyzer = new LexicalAnalyzer(fname);
-
-
-            lexicalAnalyzer.printTokens();
-
-
-
+            Parser p = new Parser(fname);
+            Program program = p.parse();
+            program.execute();
         }catch (FileNotFoundException e){
             System.err.println("FileNotFoundException" + e);
+            e.printStackTrace();
         }catch (LexicalException e){
             System.err.println("LexicalException" + e);
+            e.printStackTrace();
+        }catch (ParserException e){
+            System.out.println(e.getMessage());
+            e.printStackTrace();
+        }catch (InterpreterException e){
+            System.out.println(e.getMessage());
+            e.printStackTrace();
         }
 
 
-        parser(lexicalAnalyzer, count);
+        //parser(lexicalAnalyzer, count);
 
 
     }

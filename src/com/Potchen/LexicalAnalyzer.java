@@ -135,7 +135,7 @@ public class LexicalAnalyzer {
                         if(lexeme.equalsIgnoreCase("While")){
                             return TokenType.WHILE_TOK;
 
-                        }else if (lexeme.matches("print \\(\\w\\)")){
+                        }else if (lexeme.matches("print")){
                             return TokenType.PRINT_TOK;
                         }else if (lexeme.equalsIgnoreCase("If")){
                             return TokenType.IF_TOK;
@@ -151,7 +151,10 @@ public class LexicalAnalyzer {
                             return TokenType.THEN_TOK;
                         }else if (lexeme.equalsIgnoreCase("Else")){
                             return TokenType.ELSE_TOK;
-                        } else {
+                        }else if(lexeme.equalsIgnoreCase("Function")){
+                            return TokenType.FUNCTION_TOK;
+                        }
+                        else {
                             throw new LexicalException("invalid lexeme at row number " + (lineNumber + 1) + "and column" + columnNumber + 1);
                         }
 
@@ -206,12 +209,12 @@ public class LexicalAnalyzer {
                 i++;
 
 
-        if (line.substring(index,i).equals("print")){
+/*        if (line.substring(index,i).equals("print")){
             while(line.charAt(i) != ')' && i<= line.length())
                 i++;
             i++;
 
-        }
+        }*/
 
         return line.substring(index, i);
     }
@@ -229,4 +232,18 @@ public class LexicalAnalyzer {
             index++;
         return index;
     }
+
+    public Token getLookaheadToken() throws LexicalException{
+        if(tokens.isEmpty()){
+            throw new LexicalException("no more tokens");
+        }
+        return tokens.get(0);
+    }
+
+    public Token getNextToken() throws LexicalException{
+        if(tokens.isEmpty())
+            throw new LexicalException("No more tokens");
+        return tokens.remove(0);
+    }
+
 }
