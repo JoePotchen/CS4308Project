@@ -1,5 +1,6 @@
 package com.Potchen.Parse;
 
+import com.Potchen.Interpreter.InterpreterException;
 import com.Potchen.Interpreter.Memory;
 
 /**
@@ -22,7 +23,7 @@ public class BooleanExpression{
      * @param memory
      * @return
      */
-    public boolean value(Memory memory){
+    public boolean value(Memory memory) throws InterpreterException {
         switch (op){
             case EQ_OP:
                 if(expr1.value(memory).getNum() == expr2.value(memory).getNum()) {

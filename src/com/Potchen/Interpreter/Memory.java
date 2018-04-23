@@ -35,8 +35,12 @@ public class Memory {
      * @param character
      * @return
      */
-    public ArithmeticExpression.LiteralInteger varEquals(Character character){
-        return varMap.get(character);
+    public ArithmeticExpression.LiteralInteger varEquals(Character character) throws InterpreterException{
+        if (varMap.containsKey(character)){
+            return varMap.get(character);
+        }else {
+            throw new InterpreterException("Variable " + character + " does not exist in memory.");
+        }
     }
 
 

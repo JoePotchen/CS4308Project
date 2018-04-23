@@ -39,7 +39,7 @@ public interface Statement {
          * @param memory
          */
         @Override
-        public void logic(Memory memory) {
+        public void logic(Memory memory) throws InterpreterException{
             if(expr instanceof ArithmeticExpression.Id){
                 memory.addVar(var, memory.varEquals(((ArithmeticExpression.Id) expr).key()));//COULD BE VERY WRONG
             }else if(expr instanceof ArithmeticExpression.LiteralInteger){
@@ -121,7 +121,7 @@ public interface Statement {
          * @param memory
          */
         @Override
-        public void logic(Memory memory) {
+        public void logic(Memory memory) throws InterpreterException {
             System.out.println(expr.value(memory).getNum());
         }
     }
