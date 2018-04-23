@@ -1,5 +1,6 @@
 package com.Potchen.Parse;
 
+import com.Potchen.Interpreter.InterpreterException;
 import com.Potchen.Interpreter.Memory;
 
 /**
@@ -9,7 +10,7 @@ import com.Potchen.Interpreter.Memory;
 public interface ArithmeticExpression {
 
 
-    LiteralInteger value(Memory memory);
+    LiteralInteger value(Memory memory) throws InterpreterException;
 
 
     /**
@@ -34,7 +35,7 @@ public interface ArithmeticExpression {
          * @return The value of the Id from memory
          */
         @Override
-        public LiteralInteger value(Memory memory) {
+        public LiteralInteger value(Memory memory) throws InterpreterException {
             return memory.varEquals(key());
         }
     }
@@ -64,7 +65,7 @@ public interface ArithmeticExpression {
          * @return
          */
         @Override
-        public LiteralInteger value(Memory memory){
+        public LiteralInteger value(Memory memory) throws InterpreterException{
             int num1;
             int num2;
 
@@ -92,7 +93,7 @@ public interface ArithmeticExpression {
          * @param expr
          * @return An Integer based on the type of ArithmeticExpression
          */
-        private int getNum(Memory memory, ArithmeticExpression expr) {
+        private int getNum(Memory memory, ArithmeticExpression expr) throws InterpreterException {
             int num;
             if(expr instanceof Id){
                 num = memory.varEquals(((Id) expr).key()).getNum();

@@ -14,4 +14,6 @@ function A ( )
         print ( b )
     until == b 90
 
+    print ( c )
+
 end
